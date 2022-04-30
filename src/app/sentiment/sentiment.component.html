@@ -1,0 +1,16 @@
+
+<div style="margin: 20px;">
+  <h2>{{symbol}} ({{sentimental$}})</h2>
+  <div *ngIf="sentimental$ && sentData">
+      <div *ngFor="let senti of sentData[0].data;let indexOfelement=index;">
+          <h4 (month)="getMonth(senti.month)">{{month}}</h4>
+          <p>Change: {{senti.change}}</p>
+          <p>MSPR: {{senti.mspr}}</p>
+      <div *ngIf="senti.change else elseBlock" >
+        <h1>&#129145;</h1>
+      </div>
+      <ng-template #elseBlock><h1>&#129155;</h1></ng-template>
+    </div>
+  </div>
+    <a [routerLink]="['']" >&lt; Back to list of stocks</a>
+</div>
