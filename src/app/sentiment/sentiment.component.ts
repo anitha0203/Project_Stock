@@ -26,7 +26,6 @@ export class SentimentComponent implements OnInit {
 
   getData(){
    // console.log(" shgcshgchsvh "+this.sentimental$)
-
     this.dataService.getSymbols(this.sentimental$).subscribe((response) => {
       var data1 = JSON.stringify(response)
       let data = JSON.parse(data1)
@@ -42,8 +41,15 @@ export class SentimentComponent implements OnInit {
   }
 
   getMonth(mon){
-    console.log(" vvdjkvfjfk  "+this.month)
-    this.month = this.months[mon]
+    //console.log(" vvdjkvfjfk  "+this.month)
+    return this.months[mon-1]
+  }
+
+  getArrow(s){
+    if(s>0)
+      return true;
+    else
+      return false;
   }
 
 }

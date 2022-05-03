@@ -1,10 +1,10 @@
 export interface Quotes {
-  "c": string,
-  "d": string,
-  "dp": string,
-  "h": string,
-  "l": string,
-  "o": string,
-  "pc": string,
-  "t": string
+  "c": number,
+  "d": number,
+  "dp": number,
+  "h": number,
+  "l": number,
+  "o": number,
+  "pc": number,
+  "t": number
 }

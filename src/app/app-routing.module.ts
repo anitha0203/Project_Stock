@@ -5,7 +5,8 @@ import { SentimentComponent } from './sentiment/sentiment.component';
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
-  {path:'sentiment/:stock', component: SentimentComponent}
+  {path:'sentiment/:stock', component: SentimentComponent},
+  {path:'**', component: HomeComponent}
 ];
 
 @NgModule({

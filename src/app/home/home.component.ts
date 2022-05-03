@@ -4,8 +4,7 @@ import { CompanyName } from '@app/company-name';
 import { DataService } from '@app/data.service';
 import { UserService } from '@app/user.service';
 import { Quotes } from '../quotes';
-import { Symbol } from '../symbol'
-
+import {MatIconModule} from '@angular/material/icon';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,9 +22,9 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService, private dataService: DataService){}
 
   public ngOnInit(): void {
-      this.stock = new FormControl('', { validators: [Validators.required, Validators.pattern(/^[A-Z]{3,5}$/)] });
+      this.stock = new FormControl('', { validators: [Validators.required, Validators.pattern(/^[A-Z]{1,5}$/)] });
       this.stocks = this.userService.getStocks();
-      console.log(this.stocks)
+    //  console.log(this.stocks)
       for(var i=0;i<this.stocks.length;i++)
       {
         this.getStockData(this.stocks[i],i)
@@ -33,15 +32,14 @@ export class HomeComponent implements OnInit {
   }
 
   getStockData(ele,i){
-
     this.dataService.getSymbols(ele).subscribe((response) => {
       var data1 = JSON.stringify(response)
       let data = JSON.parse(data1)
       this.stockSymbol.push(data);
       this.symbol.push(this.stockSymbol[i].result[0].description)
-      console.log(this.symbol)
+     // console.log(this.symbol)
     })
-    
+
     this.dataService.getData(ele).subscribe((response) => {
       var data1 = JSON.stringify(response)
       let data = JSON.parse(data1)
@@ -52,16 +50,23 @@ export class HomeComponent implements OnInit {
 
   public addStock(): void {
       if (this.stock.valid) {
-          console.log("stock symbol   " + this.stock.value)
+        //  console.log("stock symbol   " + this.stock.value)
           this.userService.addStocks(this.stock.value)
           window.location.reload();
           this.stock.reset('');
       }
   }
 
+  close(stk){
+  //  console.log("remove stock symbol  " + stk)
+    this.userService.removeStock(stk)
+    window.location.reload();
+  }
 
-
-  close(){
-
+  getArrow(s){
+    if(s>0)
+      return true;
+    else
+      return false;
   }
 }
